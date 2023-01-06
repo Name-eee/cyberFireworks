@@ -20,11 +20,11 @@ function windowSize() {
 
 function initStar() {
     var star;
-    for (var i = 0; i <= 50; i++) {
+    for (var i = 0; i <= 20; i++) {
         star = {
             px: Math.random() * fmwt,
             py: Math.random() * fmht - 100,
-            r: Math.random() * 10 + 10,
+            r: Math.random() * 5 + 10,
         };
         stars.push(star);
     }
@@ -44,7 +44,7 @@ function draw() {
     var img = new Image();
     opacity();
     img.onload = function() {
-        for (var i = 0; i <= 50; i++) {
+        for (var i = 0; i <= 20; i++) {
             ctx.drawImage(img, stars[i].px, stars[i].py, stars[i].r, stars[i].r);
         }
     };
