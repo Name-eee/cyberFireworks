@@ -40,7 +40,7 @@ function initball() {
     var ball;
     var cx = fmwt / 2;
     var cy = fmht / 2;
-    for (var i = 0; i <= 100; i++) {
+    for (var i = 0; i <= 150; i++) {
         ball = {
             x: cx,
             y: cy,
@@ -75,9 +75,9 @@ function stick() {
     context.beginPath();
     context.moveTo(fmwt / 2, fmht / 2);
     context.lineTo(fmwt / 3, fmht - 5);
-    context.lineWidth = 10;
+    context.lineWidth = 5;
     context.strokeStyle = "#fff";
-    // context.globalAlpha = 0.5;
+    context.globalAlpha = 0.8;
     context.lineCap = "round";
     context.stroke();
     context.restore();
@@ -87,7 +87,8 @@ function move() {
     ctx.clearRect(0, 0, fmwt, fmht);
     initball();
     initline();
-    for (var i = 0; i <= 100; i++) {
+
+    for (var i = 0; i <= 150; i++) {
         ctx.restore();
         ctx.save();
         ctx.beginPath();
@@ -98,10 +99,10 @@ function move() {
         ctx.globalAlpha = balls[i].v / 4;
         if (balls[i].v < 1) balls.splice(i, 1);
         // ctx.fillStyle = balls[i].c;
-        var ra = context.createRadialGradient(fmwt / 2, fmht / 2, 3, fmwt / 2, fmht / 2, 50)
+        var ra = ctx.createRadialGradient(fmwt / 2, fmht / 2, 10, fmwt / 2, fmht / 2, 100)
         ra.addColorStop(0, "#fff");
-        ra.addColorStop(0.15, "orange");
-        ra.addColorStop(0.3, "yellow");
+        ra.addColorStop(0.1, "yellow");
+        ra.addColorStop(0.2, "orange");
         ra.addColorStop(1, balls[i].c);
         ctx.fillStyle = ra;
         ctx.fill();
@@ -119,10 +120,10 @@ function move() {
         ctx.globalAlpha = lines[i].v / 4;
         if (lines[i].v < 1) lines.splice(i, 1);
         // ctx.strokeStyle = lines[i].c;
-        var ra = context.createRadialGradient(fmwt / 2, fmht / 2, 3, fmwt / 2, fmht / 2, 50)
+        var ra = ctx.createRadialGradient(fmwt / 2, fmht / 2, 10, fmwt / 2, fmht / 2, 100)
         ra.addColorStop(0, "#fff");
-        ra.addColorStop(0.4, "orange");
-        ra.addColorStop(0.2, "yellow");
+        ra.addColorStop(0.1, "yellow");
+        ra.addColorStop(0.2, "orange");
         ra.addColorStop(1, lines[i].c);
         ctx.strokeStyle = ra;
         ctx.lineWidth = 2;
@@ -131,6 +132,29 @@ function move() {
 }
 
 
+var ro = 20;
+var rp;
+
+function flame() {
+    // if (ro >= 40) rp = 1;
+    // if (ro <= 20) rp = 2;
+    // if (rp == 2) ro = ro++;
+    // else ro = ro--;
+    // console.log(ro);
+    context.beginPath();
+    context.arc(fmwt / 2, fmht / 2, ro, 0, 2 * pi);
+    var gra = context.createRadialGradient(fmwt / 2, fmht / 2, 10, fmwt / 2, fmht / 2, 25);
+    gra.addColorStop(0, "rgba(255,255,255,0.9)");
+    gra.addColorStop(0.2, "rgba(255,255,255,0.7)");
+    gra.addColorStop(0.3, "rgba(255,255,0,0.5)");
+    gra.addColorStop(0.5, "rgba(255,100,0,0.3)");
+    gra.addColorStop(1, "rgba(255,0,0,0.001)")
+    context.fillStyle = gra;
+    context.fill();
+}
+
+
 stick();
 
 var m = setInterval(move, 10);
+flame();
