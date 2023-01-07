@@ -131,18 +131,9 @@ function move() {
     }
 }
 
-
-var ro = 20;
-var rp;
-
 function flame() {
-    // if (ro >= 40) rp = 1;
-    // if (ro <= 20) rp = 2;
-    // if (rp == 2) ro = ro++;
-    // else ro = ro--;
-    // console.log(ro);
     context.beginPath();
-    context.arc(fmwt / 2, fmht / 2, ro, 0, 2 * pi);
+    context.arc(fmwt / 2, fmht / 2, 20, 0, 2 * pi);
     var gra = context.createRadialGradient(fmwt / 2, fmht / 2, 10, fmwt / 2, fmht / 2, 25);
     gra.addColorStop(0, "rgba(255,255,255,0.9)");
     gra.addColorStop(0.2, "rgba(255,255,255,0.7)");
